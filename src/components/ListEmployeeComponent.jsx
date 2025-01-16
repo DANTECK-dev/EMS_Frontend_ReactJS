@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import EmployeeService from '../services/EmployeeService';
 import { useNavigate } from 'react-router-dom';
+import { handleAxiosError } from '../services/errorHandler';
 
 const ListEmployeeComponent = () => {
     const [employees, setEmployees] = useState([]);
@@ -10,9 +11,9 @@ const ListEmployeeComponent = () => {
         EmployeeService.getEmployees().then((res) => {
             setEmployees(res.data);
         }).catch((err) => {
-            navigate(`/error/${err.response.status}`)
+            handleAxiosError(err, navigate);
         });
-    }, []); // Выполняется только при монтировании компонента
+    }, [navigate]); // Выполняется только при монтировании компонента
 
     const addEmployee = () => {
         navigate('/add-employee');
@@ -27,7 +28,7 @@ const ListEmployeeComponent = () => {
             console.log(res.data);
             setEmployees(employees.filter(employee => employee.id !== id));
         }).catch((err) => {
-            navigate(`/error/${err.response.status}`)
+            handleAxiosError(err, navigate);
         });
     };
 

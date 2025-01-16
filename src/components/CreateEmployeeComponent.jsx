@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import EmployeeService from '../services/EmployeeService';
+import { handleAxiosError } from '../services/errorHandler';
 
 const CreateEmployeeComponent = () => {
     const [firstName, setFirstName] = useState('');
@@ -16,7 +17,7 @@ const CreateEmployeeComponent = () => {
         EmployeeService.createEmployees(employee).then(() => {
             navigate('/employees');
         }).catch((err) => {
-            navigate(`/error/${err.response.status}`)
+            handleAxiosError(err, navigate);
         });
     };
 

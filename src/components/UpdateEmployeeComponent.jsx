@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import EmployeeService from '../services/EmployeeService';
+import { handleAxiosError } from '../services/errorHandler';
 
 const UpdateEmployeeComponent = () => {
     const { id } = useParams(); // Получаем ID из параметров маршрута
@@ -17,9 +18,9 @@ const UpdateEmployeeComponent = () => {
             setLastName(employee.lastName);
             setEmail(employee.email);
         }).catch((err) => {
-            navigate(`/error/${err.response.status}`)
+            handleAxiosError(err, navigate);
         });
-    }, [id]); // Зависимость - id
+    }, [id, navigate]); // Зависимость - id
 
     const updateEmployee = (e) => {
         e.preventDefault();
@@ -29,7 +30,7 @@ const UpdateEmployeeComponent = () => {
         EmployeeService.updateEmployee(id, employee).then(() => {
             navigate('/employees');
         }).catch((err) => {
-            navigate(`/error/${err.response.status}`)
+            handleAxiosError(err, navigate);
         });
     };
 

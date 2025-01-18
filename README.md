@@ -1,4 +1,4 @@
-# Employee Managment Sysytem(EMS) Frontend (ReactJS)
+# Employee Managment Sysytem (EMS) Frontend (ReactJS)
 
 Это фронтенд-приложение для управления сотрудниками, реализованное с использованием React. Оно взаимодействует с серверной частью, построенной на Spring Boot, и базой данных MySQL. Приложение позволяет добавлять, изменять и удалять информацию о сотрудниках.
 >Ссылка на [BackEnd](https://github.com/DANTECK-dev/ems-springboot-react-backend) 
